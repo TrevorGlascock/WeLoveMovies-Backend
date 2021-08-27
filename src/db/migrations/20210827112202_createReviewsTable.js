@@ -17,5 +17,5 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-  return knex.schema.droptTable("reviews");
+  return knex.schema.dropTable("reviews");
 };
