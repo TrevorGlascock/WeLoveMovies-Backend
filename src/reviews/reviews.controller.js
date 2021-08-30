@@ -15,6 +15,12 @@ async function hasReviewId(req, res, next) {
 }
 
 /**************************** CRUDL Operation Handlers ****************************/
+async function destroy(req, res, next) {
+  const { review } = res.locals;
+  await service.delete(review);
+  res.sendStatus(204);
+}
+
 async function list(req, res, next) {
   const data = await service.list();
   res.json({ data });
@@ -22,4 +28,5 @@ async function list(req, res, next) {
 
 module.exports = {
   list: asyncErrorBoundary(list),
+  delete: [asyncErrorBoundary(hasReviewId), asyncErrorBoundary(destroy)],
 };
