@@ -19,7 +19,10 @@ async function update(req, res, next) {
   const { review } = res.locals;
   const { score, content } = req.body.data;
   const newReview = { ...review, score, content };
-  const data = await service.update(newReview);
+  await service.update(newReview);
+
+  const data = await service.readWithCritic(review.review_id);
+
   res.json({ data });
 }
 
