@@ -14,10 +14,8 @@ app.use(cors());
 app.use(express.json());
 
 app.use("/movies", moviesRouter);
-
-// Commented out until routes are set up
-// app.use("/reviews", reviewsRouter);
-// app.use("/theaters", theatersRouter);
+// app.use("/reviews", reviewsRouter);  // Commented out until routes are set up
+app.use("/theaters", theatersRouter);
 
 app.use(routeNotFound);
 app.use(errorHandler);
