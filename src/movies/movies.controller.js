@@ -16,8 +16,10 @@ async function hasMovieId(req, res, next) {
 
 /**************************** CRUDL Operation Handlers ****************************/
 async function list(req, res, next) {
-  // Let the service handle the optional query
-  const data = await service.list(req.query.is_showing);
+  // If the query is present and true, use the NowShowing version from the service
+  const data = req.query.is_showing
+    ? await service.listNowShowing()
+    : await service.list();
   res.json({ data });
 }
 
