@@ -17,7 +17,7 @@ async function hasReviewId(req, res, next) {
 /**************************** CRUDL Operation Handlers ****************************/
 async function destroy(req, res, next) {
   const { review } = res.locals;
-  await service.delete(review);
+  await service.delete(review.review_id);
   res.sendStatus(204);
 }
 
