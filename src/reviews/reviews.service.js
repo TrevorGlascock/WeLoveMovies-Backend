@@ -16,5 +16,6 @@ function list() {
 
 module.exports = {
   list,
+  read,
   delete: destroy,
 };
