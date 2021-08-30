@@ -2,18 +2,17 @@ const db = require("../db/connection");
 const tableName = "reviews";
 
 /**************************** Specialized Knex Queries ****************************/
-function readAppendCritic() {
+function readWithCritic(review_id) {
   return db({ r: tableName })
     .join({ c: "critics" }, "r.critic_id", "c.critic_id")
-    .groupBy("r.rating_id")
-    .select("*");
+    .select("*")
+    .where({ review_id })
 }
 
 /**************************** CRUDL Knex Queries ****************************/
 function update(review) {
   const { review_id } = review;
-  console.log(review_id);
-  return db(tableName).select("*").where(review_id).update(review, "*");
+  return db(tableName).select("*").where({ review_id }).update(review, "*");
 }
 
 function read(review_id) {
@@ -33,5 +32,5 @@ module.exports = {
   read,
   delete: destroy,
   update,
-  readAppendCritic,
+  readWithCritic,
 };
