@@ -1,6 +1,8 @@
 const db = require("../db/connection");
 const tableName = "movies";
 
+/**************************** Specialized Knex Queries ****************************/
+
 function listNowShowing() {
   return db({ m: tableName })
     .join({ mt: "movies_theaters" }, "m.movie_id", "mt.movie_id")
