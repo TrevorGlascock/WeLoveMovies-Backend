@@ -13,6 +13,7 @@ const criticConfig = {
 };
 
 const appendCritic = mapProperties(criticConfig);
+//TODO: structure isn't quite right, review this later
 
 function readWithCritic(review_id) {
   return db({ r: tableName })
