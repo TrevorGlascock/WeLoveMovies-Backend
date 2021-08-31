@@ -22,7 +22,7 @@ async function read(req, res, next) {
 }
 
 async function listReviews(req, res, next) {
-  const { movie_id } = res.locals;
+  const { movie_id } = res.locals.movie;
   await reviewsService.listFromMovie(movie_id);
 }
 
