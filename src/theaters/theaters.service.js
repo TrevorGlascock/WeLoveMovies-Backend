@@ -23,9 +23,9 @@ const reduceMovies = reduceProperties("theater_id", moviesConfig);
 function list(movie_id) {
   // TODO Returns a list of all theaters with appropriate movies embedded
   let pgQuery = db({ t: originTable })
+    .select("*")
     .join({ mt: "movies_theaters" }, "t.theater_id", "mt.theater_id")
-    .join({ m: configTable }, "mt.movie_id", "m.movie_id")
-    .select("*");
+    .join({ m: configTable }, "mt.movie_id", "m.movie_id");
 
   // if a movie_id is provided, then filter by it
   if (movie_id) pgQuery = pgQuery.where("m.movie_id", movie_id);
