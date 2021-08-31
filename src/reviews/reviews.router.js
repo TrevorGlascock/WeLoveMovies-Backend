@@ -10,6 +10,6 @@ router
   .all(methodNotAllowed);
 
 // GET /reviews lists all reviews
-router.route("/").all(methodNotAllowed);
+router.route("/").get(controller.list).all(methodNotAllowed);
 
 module.exports = router;
