@@ -4,16 +4,13 @@ const tableName = "reviews";
 
 /**************************** Specialized Knex Queries ****************************/
 const criticConfig = {
-  critic_id: "critic.criticId",
   preferred_name: "critic.preferred_name",
   surname: "critic.surname",
   organization_name: "critic.organization_name",
-  created_at: "critic.created_at",
-  updated_at: "critic.updated_at",
 };
 
 const appendCritic = mapProperties(criticConfig);
-//TODO: structure isn't quite right, review this later
+//TODO: data just needs updated_at and created_at properties
 
 function readWithCritic(review_id) {
   return db({ r: tableName })
@@ -21,7 +18,8 @@ function readWithCritic(review_id) {
     .select("*")
     .where({ review_id })
     .first()
-    .then(appendCritic);
+    .then(appendCritic)
+    .then((data) => ({ ...data, updated_at: "test", created_at: "test" }));
 }
 
 /**************************** CRUDL Knex Queries ****************************/
