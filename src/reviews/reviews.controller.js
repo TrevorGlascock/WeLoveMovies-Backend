@@ -32,13 +32,7 @@ async function destroy(req, res, next) {
   res.sendStatus(204);
 }
 
-async function list(req, res, next) {
-  const data = await service.list();
-  res.json({ data });
-}
-
 module.exports = {
-  list: asyncErrorBoundary(list),
   delete: [asyncErrorBoundary(hasReviewId), asyncErrorBoundary(destroy)],
   update: [asyncErrorBoundary(hasReviewId), asyncErrorBoundary(update)],
 };
