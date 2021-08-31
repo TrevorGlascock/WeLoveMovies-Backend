@@ -1,5 +1,4 @@
 const service = require("./movieId.service");
-const reviewsService = require("../../reviews/reviews.service");
 const asyncErrorBoundary = require("../../errors/asyncErrorBoundary");
 
 /**************************** Middleware Functions ****************************/
@@ -21,16 +20,7 @@ async function read(req, res, next) {
   res.json({ data });
 }
 
-async function listReviews(req, res, next) {
-  const { movie_id } = res.locals.movie;
-  const data = await reviewsService.listFromMovie(movie_id);
-  res.json({ data });
-}
-
 module.exports = {
   read: [asyncErrorBoundary(hasMovieId), read],
-  listReviews: [
-    asyncErrorBoundary(hasMovieId),
-    asyncErrorBoundary(listReviews),
-  ],
+  hasMovieId,
 };
