@@ -19,6 +19,10 @@ function readWithCritic(review_id) {
     .then(appendCritic);
 }
 
+function listFromMovie(movie_id) {
+  return db(tableName).select("*").where({ movie_id });
+}
+
 /**************************** CRUDL Knex Queries ****************************/
 function update(review) {
   const { review_id } = review;
@@ -43,4 +47,5 @@ module.exports = {
   delete: destroy,
   update,
   readWithCritic,
+  listFromMovie,
 };
