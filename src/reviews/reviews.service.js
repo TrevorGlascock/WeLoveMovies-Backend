@@ -10,16 +10,13 @@ const criticConfig = {
 };
 
 const appendCritic = mapProperties(criticConfig);
-//TODO: data just needs updated_at and created_at properties
-
 function readWithCritic(review_id) {
   return db({ r: tableName })
     .join({ c: "critics" }, "r.critic_id", "c.critic_id")
     .select("*")
     .where({ review_id })
     .first()
-    .then(appendCritic)
-    .then((data) => ({ ...data, updated_at: "test", created_at: "test" }));
+    .then(appendCritic);
 }
 
 /**************************** CRUDL Knex Queries ****************************/
