@@ -35,7 +35,9 @@ async function destroy(req, res, next) {
 async function list(req, res, next) {
   const { movie: { movie_id = null } = {} } = res.locals;
   // movie_id is truthy ? list just the reviews for that movie  : Otherwise list all reviews
-  const data = movie_id ? await service.listFromMovie(movie_id) : service.list;
+  const data = movie_id
+    ? await service.listFromMovie(movie_id)
+    : await service.list();
   res.json({ data });
 }
 
