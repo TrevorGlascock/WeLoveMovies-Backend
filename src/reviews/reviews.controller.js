@@ -33,12 +33,14 @@ async function destroy(req, res, next) {
 }
 
 async function list(req, res, next) {
-  const data = await service.list();
+  const { movie: { movie_id = null } = {} } = res.locals;
+  // movie_id is truthy ? list just the reviews for that movie  : Otherwise list all reviews
+  const data = movie_id ? await service.listFromMovie(movie_id) : service.list;
   res.json({ data });
 }
 
 module.exports = {
-  list: asyncErrorBoundary(list),
   delete: [asyncErrorBoundary(hasReviewId), asyncErrorBoundary(destroy)],
   update: [asyncErrorBoundary(hasReviewId), asyncErrorBoundary(update)],
+  list: asyncErrorBoundary(list),
 };

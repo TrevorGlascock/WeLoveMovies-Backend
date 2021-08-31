@@ -20,13 +20,17 @@ const moviesConfig = {
 const reduceMovies = reduceProperties("theater_id", moviesConfig);
 
 /**************************** CRUDL Knex Queries ****************************/
-function list() {
+function list(movie_id) {
   // TODO Returns a list of all theaters with appropriate movies embedded
-  return db({ t: originTable })
-    .join({ mt: "movies_theaters" }, "t.theater_id", "mt.theater_id")
-    .join({ m: configTable }, "mt.movie_id", "m.movie_id")
+  let pgQuery = db({ t: originTable })
     .select("*")
-    .then(reduceMovies);
+    .join({ mt: "movies_theaters" }, "t.theater_id", "mt.theater_id")
+    .join({ m: configTable }, "mt.movie_id", "m.movie_id");
+
+  // if a movie_id is provided, then filter by it
+  if (movie_id) pgQuery = pgQuery.where("m.movie_id", movie_id);
+
+  return pgQuery.then(reduceMovies);
 }
 
 module.exports = {

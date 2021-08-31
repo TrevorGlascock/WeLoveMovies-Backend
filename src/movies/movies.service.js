@@ -2,7 +2,6 @@ const db = require("../db/connection");
 const tableName = "movies";
 
 /**************************** Specialized Knex Queries ****************************/
-
 function listNowShowing() {
   return db({ m: tableName })
     .join({ mt: "movies_theaters" }, "m.movie_id", "mt.movie_id")
@@ -16,12 +15,7 @@ function list() {
   return db(tableName).select("*");
 }
 
-function read(movie_id) {
-  return db(tableName).select("*").where({ movie_id }).first();
-}
-
 module.exports = {
-  read,
   list,
   listNowShowing,
 };
