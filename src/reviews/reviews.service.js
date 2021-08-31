@@ -44,7 +44,7 @@ function destroy(review_id) {
   return db(tableName).where({ review_id }).del();
 }
 
-function list(movie_id) {
+function list() {
   return db(tableName).select("*");
 }
 
