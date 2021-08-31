@@ -23,7 +23,8 @@ async function read(req, res, next) {
 
 async function listReviews(req, res, next) {
   const { movie_id } = res.locals.movie;
-  await reviewsService.listFromMovie(movie_id);
+  const data = await reviewsService.listFromMovie(movie_id);
+  res.json({ data });
 }
 
 module.exports = {
